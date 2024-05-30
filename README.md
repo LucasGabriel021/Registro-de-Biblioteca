@@ -17,7 +17,8 @@ O projeto é composto por três classes principais:
 
 ## Como Executar
 
-1. Compile o código do servidor.
+1. Certifique-se que o arquivo 'livros.json' está no mesmo diretório do servidor e contém um array JSON de livros.
+2. Compile o código do servidor.
 2. Compile o código do cliente.
 3. No terminal, insira um dos comandos: LISTA, ALUGUEL, DEVOLUCAO, ADICIONA OU SAIDA.
 

@@ -25,10 +25,15 @@ public class Servidor {
     }
 
     private static void loadLivros() {
-        try {
-            livros = mapper.readValue(new File(FILE_PATH), new TypeReference<List<Livro>>() {});
-        } catch (IOException e) {
-            e.printStackTrace();
+        File file = new File(FILE_PATH);
+        if (file.exists()) {
+            try {
+                livros = mapper.readValue(file, new TypeReference<List<Livro>>() {});
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Arquivo livros.json não encontrado, iniciando com lista vazia.");
         }
     }
 
@@ -63,13 +68,13 @@ public class Servidor {
                             break;
 
                         case "ALUGUEL":
-                            String nomeAlugar = parts[1];
-                            rentBook(nomeAlugar, out);
+                            String tituloAlugar = parts[1];
+                            rentBook(tituloAlugar, out);
                             break;
 
                         case "DEVOLUCAO":
-                            String nomeDevolver = parts[1];
-                            returnBook(nomeDevolver, out);
+                            String tituloDevolver = parts[1];
+                            returnBook(tituloDevolver, out);
                             break;
 
                         case "ADICIONA":
