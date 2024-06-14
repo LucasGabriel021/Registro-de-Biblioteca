@@ -16,7 +16,8 @@ public class Cliente {
 
             while (true) {
                 System.out.println("Escolha uma opção: LISTA, ALUGUEL, DEVOLUCAO, ADICIONA ou SAIDA:");
-                String input = scanner.nextLine();
+                System.out.println("Lembre-se, para realizar uma operação seguir o padrão: OPERACAO; titulo; autor; genero; exemplar");
+                String input = scanner.nextLine().toUpperCase();
 
                 if (input.equalsIgnoreCase("SAIDA")) {
                     break;

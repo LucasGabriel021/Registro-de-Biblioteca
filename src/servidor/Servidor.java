@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Servidor {
     private static final int PORT = 12345;
     private static List<Livro> livros = new ArrayList<>();
-    private static final String FILE_PATH = "livros.json";
+    // private static final String FILE_PATH = "livros.json";
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void main(String[] args) {
@@ -25,21 +25,17 @@ public class Servidor {
     }
 
     private static void loadLivros() {
-        File file = new File(FILE_PATH);
-        if (file.exists()) {
-            try {
-                livros = mapper.readValue(file, new TypeReference<List<Livro>>() {});
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Arquivo livros.json não encontrado, iniciando com lista vazia.");
+        try (InputStream inputStream = Servidor.class.getResourceAsStream(("/livros.json"))){
+            livros = mapper.readValue(inputStream, new TypeReference<List<Livro>>() {});
+            System.out.println(livros);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     private static void saveLivros() {
         try {
-            mapper.writeValue(new File(FILE_PATH), livros);
+            mapper.writeValue(new File("/src/servidor/livros.json"), livros);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,6 +56,11 @@ public class Servidor {
                 String request;
                 while ((request = in.readLine()) != null) {
                     String[] parts = request.split(";");
+                    System.out.println(parts);
+                    if(parts.length < 1) {
+                        out.println("Comando inválido!");
+                        continue;
+                    }
                     String command = parts[0];
 
                     switch (command) {
@@ -68,21 +69,33 @@ public class Servidor {
                             break;
 
                         case "ALUGUEL":
+                            if(parts.length < 2) {
+                                out.println("Comando inválido!");
+                                break;
+                            }
                             String tituloAlugar = parts[1];
                             rentBook(tituloAlugar, out);
                             break;
 
                         case "DEVOLUCAO":
+                            if(parts.length < 2) {
+                                out.println("Comando inválido!");
+                                break;
+                            }
                             String tituloDevolver = parts[1];
                             returnBook(tituloDevolver, out);
                             break;
 
                         case "ADICIONA":
+                            if(parts.length < 5) {
+                                out.println("Comando inválido!");
+                                break;
+                            }
                             String titulo = parts[1];
                             String autor = parts[2];
                             String genero = parts[3];
                             int exemplares = Integer.parseInt(parts[4]);
-                            addBook(new Livro(autor, titulo, genero, exemplares), out);
+                            addBook(new Livro(titulo, autor, genero, exemplares), out);
                             break;
 
                         default:
