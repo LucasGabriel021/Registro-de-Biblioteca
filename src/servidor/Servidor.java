@@ -114,7 +114,7 @@ public class Servidor {
                 if (livro.getTitulo().equalsIgnoreCase(titulo) && livro.getExemplares() > 0) {
                     livro.setExemplares(livro.getExemplares() - 1);
                     saveLivros();
-                    out.println("Livro alugado: " + livro);
+                    out.println("Alugado: " + livro);
                     return;
                 }
             }
@@ -126,7 +126,7 @@ public class Servidor {
                 if (livro.getTitulo().equalsIgnoreCase(titulo)) {
                     livro.setExemplares(livro.getExemplares() + 1);
                     saveLivros();
-                    out.println("Livro devolvido: " + livro);
+                    out.println("Devolvido: " + livro);
                     return;
                 }
             }
@@ -137,7 +137,7 @@ public class Servidor {
             System.out.println("Adicionando livro: " + livro);
             livros.add(livro);
             saveLivros();
-            out.println("Livro adicionado: " + livro);
+            out.println("Adicionado: " + livro);
             System.out.println("Lista de livros após adição: " + livros);
         }
     }

@@ -18,10 +18,14 @@ public class Cliente {
                 if(id == 0){
                     System.out.println("\n");
                     System.out.println("-----SEJA BEM VINDO-----");
-                    System.out.println("\n");
                 }
-                System.out.println("Escolha uma opção: LISTA, ALUGUEL, DEVOLUCAO, ADICIONA ou SAIDA:");
-                System.out.println("Lembre-se, para realizar uma operação seguir o padrão: OPERACAO; titulo; autor; genero; exemplar");
+                System.out.println("\n");
+                System.out.println("-----MENU DE OPÇÕES-----");
+                System.out.println("LISTA");
+                System.out.println("ALUGUEL;TITULO");
+                System.out.println("DEVOLUCAO;TITULO");
+                System.out.println("ADICIONA;TITULO;AUTOR;GENERO;EXEMPLARES");
+                System.out.println("SAIDA");
                 System.out.println("\n");
                 String input = scanner.nextLine().toUpperCase();
                 id++;
