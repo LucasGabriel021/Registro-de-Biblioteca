@@ -1,62 +1,66 @@
 [
   {
-    "titulo": "Meditações",
     "autor": "Marco Aurélio",
+    "exemplares": 1,
     "genero": "Filosofia",
-    "exemplares": 4
+    "titulo": "Meditações"
   },
   {
-    "titulo": "Orgulho e Preconceito",
-    "autor": "Jane Austen",
-    "genero": "Romance",
-    "exemplares": 4
+    "autor":"Jane Austen",
+    "titulo":"Orgulho e Preconceito",
+    "genero":"Romance",
+    "exemplares":4
   },
   {
-    "titulo": "Nada Pode Me Ferir",
     "autor": "David Goggins",
+    "exemplares": 2,
     "genero": "Autoajuda",
-    "exemplares": 2
+    "titulo": "Nada Pode Me Ferir"
+  },
+  {"autor":"H.G. Wells",
+    "titulo":"O Homem Invisível",
+    "genero":"Ficção Científica",
+    "exemplares":1
+  },
+  {"autor":"Thomas More",
+    "titulo":"Utopia",
+    "genero":"Filosofia",
+    "exemplares":14
   },
   {
-    "titulo": "O Homem Invisível",
-    "autor": "H.G. Wells",
-    "genero": "Ficção Científica",
-    "exemplares": 1
+    "autor":"George Orwell",
+    "titulo":"A Revolução dos Bichos",
+    "genero":"Fábula Política",
+    "exemplares":1
   },
   {
-    "titulo": "Utopia",
-    "autor": "Thomas More",
-    "genero": "Filosofia",
-    "exemplares": 14
+    "autor":"C.S. Lewis",
+    "titulo":"As Crônicas de Nárnia",
+    "genero":"Fantasia",
+    "exemplares":8
   },
   {
-    "titulo": "A Revolução dos Bichos",
-    "autor": "George Orwell",
-    "genero": "Fábula Política",
-    "exemplares": 1
+    "autor":"Tomás Antônio Gonzaga",
+    "titulo":"Cartas Chilenas",
+    "genero":"Sátira",
+    "exemplares":3
   },
   {
-    "titulo": "As Crônicas de Nárnia",
-    "autor": "C.S. Lewis",
-    "genero": "Fantasia",
-    "exemplares": 8
+    "autor":"Nicolau Maquiavel",
+    "titulo":"O Príncipe",
+    "genero":"Filosofia Política",
+    "exemplares":1
   },
   {
-    "titulo": "Cartas Chilenas",
-    "autor": "Tomás Antônio Gonzaga",
-    "genero": "Sátira",
-    "exemplares": 3
+    "autor":"Douglas Adams",
+    "titulo":"O Guia do Mochileiro das Galáxias",
+    "genero":"Ficção Científica",
+    "exemplares":10
   },
   {
-    "titulo": "O Príncipe",
-    "autor": "Nicolau Maquiavel",
-    "genero": "Filosofia Política",
-    "exemplares": 1
-  },
-  {
-    "titulo": "O Guia do Mochileiro das Galáxias",
-    "autor": "Douglas Adams",
-    "genero": "Ficção Científica",
-    "exemplares": 10
+    "autor": "JK",
+    "exemplares": 3,
+    "genero": "FICÇÃO",
+    "titulo": "HARRY POTTER"
   }
 ]

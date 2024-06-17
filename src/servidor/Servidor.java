@@ -25,7 +25,7 @@ public class Servidor {
     }
 
     private static void loadLivros() {
-        try (InputStream inputStream = Servidor.class.getResourceAsStream(("/livros.json"))){
+        try (InputStream inputStream = new FileInputStream("src/servidor/livros.json")) {
             livros = mapper.readValue(inputStream, new TypeReference<List<Livro>>() {});
             System.out.println(livros);
         } catch (IOException e) {
@@ -35,9 +35,11 @@ public class Servidor {
 
     private static void saveLivros() {
         try {
-            mapper.writeValue(new File("/src/servidor/livros.json"), livros);
+            mapper.writeValue(new File("src/servidor/livros.json"), livros);
+            System.out.println("Livros salvos com sucesso no arquivo ");
         } catch (IOException e) {
             e.printStackTrace();
+            System.err.println("Erro ao salvar os livros: " + e.getMessage());
         }
     }
 
@@ -132,9 +134,11 @@ public class Servidor {
         }
 
         private void addBook(Livro livro, PrintWriter out) {
+            System.out.println("Adicionando livro: " + livro);
             livros.add(livro);
             saveLivros();
             out.println("Livro adicionado: " + livro);
+            System.out.println("Lista de livros após adição: " + livros);
         }
     }
 }
