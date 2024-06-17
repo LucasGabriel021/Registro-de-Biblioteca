@@ -23,7 +23,6 @@ public class Cliente {
                     break;
                 }
 
-                // Validar comando e enviar ao servidor
                 if (validarComando(input)) {
                     out.println(input);
                     if (input.equals("POPULARES")) {
@@ -55,7 +54,6 @@ public class Cliente {
     }
 
     private static boolean validarComando(String input) {
-        // Validar comandos possíveis
         return input.matches("LISTA|ALUGUEL;.+|DEVOLUCAO;.+|ADICIONA;.+;.+;.+;\\d+|DISPONIVEL;.+|POPULARES|SAIDA");
     }
 }
