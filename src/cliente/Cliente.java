@@ -13,12 +13,18 @@ public class Cliente {
              Scanner scanner = new Scanner(System.in)) {
 
             System.out.println("Cliente conectado.");
-
+            int id = 0;
             while (true) {
+                if(id == 0){
+                    System.out.println("\n");
+                    System.out.println("-----SEJA BEM VINDO-----");
+                    System.out.println("\n");
+                }
                 System.out.println("Escolha uma opção: LISTA, ALUGUEL, DEVOLUCAO, ADICIONA ou SAIDA:");
                 System.out.println("Lembre-se, para realizar uma operação seguir o padrão: OPERACAO; titulo; autor; genero; exemplar");
+                System.out.println("\n");
                 String input = scanner.nextLine().toUpperCase();
-
+                id++;
                 if (input.equalsIgnoreCase("SAIDA")) {
                     break;
                 }
