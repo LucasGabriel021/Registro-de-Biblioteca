@@ -2,11 +2,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Livro {
-    private String autor;
     private String titulo;
+    private String autor;
     private String genero;
     private int exemplares;
+    private int contadorAluguel;
 
+
+    public int getContadorAluguel() {
+        return contadorAluguel;
+    }
+
+    public void setContadorAluguel(int contadorAluguel) {
+        this.contadorAluguel = contadorAluguel;
+    }
     // Construtor padrão
     public Livro() {}
 
