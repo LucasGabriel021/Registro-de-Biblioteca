@@ -100,6 +100,19 @@ public class Servidor {
                             addBook(new Livro(titulo, autor, genero, exemplares), out);
                             break;
 
+                        case "DISPONIVEL":
+                            if (parts.length < 2) {
+                                out.println("Comando inválido!");
+                                break;
+                            }
+                            String tituloDisponivel = parts[1];
+                            showAvailableCopies(tituloDisponivel, out);
+                            break;
+
+                        case "POPULARES":
+                            showPopularAuthors(out);
+                            break;
+
                         default:
                             out.println("Comando não reconhecido.");
                     }
@@ -138,7 +151,33 @@ public class Servidor {
             livros.add(livro);
             saveLivros();
             out.println("Adicionado: " + livro);
-            System.out.println("Lista de livros após adição: " + livros);
+        }
+
+        private void showAvailableCopies(String titulo, PrintWriter out) {
+            for (Livro livro : livros) {
+                if (livro.getTitulo().equalsIgnoreCase(titulo)) {
+                    out.println("Exemplares disponíveis de '" + titulo + "': " + livro.getExemplares());
+                    return;
+                }
+            }
+            out.println("Livro não encontrado.");
+        }
+
+        private void showPopularAuthors(PrintWriter out) {
+            Map<String, Integer> authorCount = new HashMap<>();
+            for (Livro livro : livros) {
+                String autor = livro.getAutor();
+                authorCount.put(autor, authorCount.getOrDefault(autor, 0) + livro.getContadorAluguel());
+            }
+
+            List<Map.Entry<String, Integer>> sortedAuthors = new ArrayList<>(authorCount.entrySet());
+            sortedAuthors.sort((a1, a2) -> a2.getValue().compareTo(a1.getValue())); // Ordena por número de aluguéis
+
+            StringBuilder sb = new StringBuilder();
+            for (Map.Entry<String, Integer> entry : sortedAuthors) {
+                sb.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" vezes alugado\n");
+            }
+
+            out.println(sb.toString());
         }
     }
-}
