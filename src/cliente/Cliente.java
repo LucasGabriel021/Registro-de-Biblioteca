@@ -13,33 +13,50 @@ public class Cliente {
              Scanner scanner = new Scanner(System.in)) {
 
             System.out.println("Cliente conectado.");
-            int id = 0;
+
             while (true) {
-                if(id == 0){
-                    System.out.println("\n");
-                    System.out.println("-----SEJA BEM VINDO-----");
-                }
-                System.out.println("\n");
-                System.out.println("-----MENU DE OPÇÕES-----");
-                System.out.println("LISTA");
-                System.out.println("ALUGUEL;TITULO");
-                System.out.println("DEVOLUCAO;TITULO");
-                System.out.println("ADICIONA;TITULO;AUTOR;GENERO;EXEMPLARES");
-                System.out.println("SAIDA");
-                System.out.println("\n");
+                exibirMenu();
                 String input = scanner.nextLine().toUpperCase();
-                id++;
-                if (input.equalsIgnoreCase("SAIDA")) {
+
+                if (input.equals("SAIDA")) {
+                    out.println(input);
                     break;
                 }
 
-                out.println(input);
-                String response = in.readLine();
-                System.out.println("Resposta do servidor: " + response);
+                // Validar comando e enviar ao servidor
+                if (validarComando(input)) {
+                    out.println(input);
+                    if (input.equals("POPULARES")) {
+                        String response = in.readLine();
+                        System.out.println("Autores mais populares:\n" + response);
+                    } else {
+                        String response = in.readLine();
+                        System.out.println("Resposta do servidor: " + response);
+                    }
+                } else {
+                    System.out.println("Comando inválido.");
+                }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Erro de comunicação com o servidor: " + e.getMessage());
         }
+    }
+
+    private static void exibirMenu() {
+        System.out.println("\n----- MENU DE OPÇÕES -----");
+        System.out.println("LISTA");
+        System.out.println("ALUGUEL;TITULO");
+        System.out.println("DEVOLUCAO;TITULO");
+        System.out.println("ADICIONA;TITULO;AUTOR;GENERO;EXEMPLARES");
+        System.out.println("DISPONIVEL;TITULO_DO_LIVRO");
+        System.out.println("POPULARES");
+        System.out.println("SAIDA");
+        System.out.println("--------------------------");
+    }
+
+    private static boolean validarComando(String input) {
+        // Validar comandos possíveis
+        return input.matches("LISTA|ALUGUEL;.+|DEVOLUCAO;.+|ADICIONA;.+;.+;.+;\\d+|DISPONIVEL;.+|POPULARES|SAIDA");
     }
 }
 
