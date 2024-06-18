@@ -15,46 +15,28 @@ public class Cliente {
             System.out.println("Cliente conectado.");
 
             while (true) {
-                exibirMenu();
+                System.out.println("\n----- MENU DE OPÇÕES -----");
+                System.out.println("LISTA");
+                System.out.println("ALUGUEL;TITULO");
+                System.out.println("DEVOLUCAO;TITULO");
+                System.out.println("ADICIONA;TITULO;AUTOR;GENERO;EXEMPLARES");
+                System.out.println("GENERO;GENEROLIVRO");
+                System.out.println("SAIDA");
+                System.out.println("\nDigite um comando:");
+
                 String input = scanner.nextLine().toUpperCase();
 
-                if (input.equals("SAIDA")) {
-                    out.println(input);
+                if (input.equalsIgnoreCase("SAIDA")) {
                     break;
                 }
 
-                if (validarComando(input)) {
-                    out.println(input);
-                    if (input.equals("POPULARES")) {
-                        String response = in.readLine();
-                        System.out.println("Autores mais populares:\n" + response);
-                    } else {
-                        String response = in.readLine();
-                        System.out.println("Resposta do servidor: " + response);
-                    }
-                } else {
-                    System.out.println("Comando inválido.");
-                }
+                out.println(input);
+                String response = in.readLine();
+                System.out.println("Resposta do servidor: " + response);
             }
         } catch (IOException e) {
-            System.err.println("Erro de comunicação com o servidor: " + e.getMessage());
+            e.printStackTrace();
         }
-    }
-
-    private static void exibirMenu() {
-        System.out.println("\n----- MENU DE OPÇÕES -----");
-        System.out.println("LISTA");
-        System.out.println("ALUGUEL;TITULO");
-        System.out.println("DEVOLUCAO;TITULO");
-        System.out.println("ADICIONA;TITULO;AUTOR;GENERO;EXEMPLARES");
-        System.out.println("DISPONIVEL;TITULO_DO_LIVRO");
-        System.out.println("POPULARES");
-        System.out.println("SAIDA");
-        System.out.println("--------------------------");
-    }
-
-    private static boolean validarComando(String input) {
-        return input.matches("LISTA|ALUGUEL;.+|DEVOLUCAO;.+|ADICIONA;.+;.+;.+;\\d+|DISPONIVEL;.+|POPULARES|SAIDA");
     }
 }
 
