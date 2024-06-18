@@ -22,7 +22,7 @@ O projeto é composto por três classes principais:
 2. Compile o código do servidor.
 2. Compile o código do cliente.
 3. No terminal, insira um dos comandos: LISTA, ALUGUEL, DEVOLUCAO, GENERO, ADICIONA OU SAIDA.
-OBS: Em caso de erro na execução do programa, sugerimos a utilização da IDE IntelliJ.
+4. **OBS:** Em caso de erro na execução do programa, sugerimos a utilização da IDE IntelliJ.
 
 ## Integrantes do Grupo
 
