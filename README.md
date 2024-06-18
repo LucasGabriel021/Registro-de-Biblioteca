@@ -14,13 +14,15 @@ O projeto é composto por três classes principais:
 - **ALUGUEL**: Permite o aluguel de um livro, reduzindo o número de exemplares disponíveis.
 - **DEVOLUCAO**: Permite a devolução de um livro, aumentando o número de exemplares disponíveis.
 - **ADICIONA**: Adiciona um novo livro ao acervo da biblioteca.
+- **GENERO**: Permite listar pelo gênero do livro.
 
 ## Como Executar
 
 1. Certifique-se que o arquivo 'livros.json' está no mesmo diretório do servidor e contém um array JSON de livros.
 2. Compile o código do servidor.
 2. Compile o código do cliente.
-3. No terminal, insira um dos comandos: LISTA, ALUGUEL, DEVOLUCAO, ADICIONA OU SAIDA.
+3. No terminal, insira um dos comandos: LISTA, ALUGUEL, DEVOLUCAO, GENERO, ADICIONA OU SAIDA.
+OBS: Em caso de erro na execução do programa, sugerimos a utilização da IDE IntelliJ.
 
 ## Integrantes do Grupo
 
