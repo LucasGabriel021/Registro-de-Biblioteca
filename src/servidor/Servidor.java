@@ -58,8 +58,8 @@ public class Servidor {
                 String request;
                 while ((request = in.readLine()) != null) {
                     String[] parts = request.split(";");
-                    System.out.println(parts);
-                    if(parts.length < 1) {
+                    System.out.println(Arrays.toString(parts));
+                    if (parts.length < 1) {
                         out.println("Comando inválido!");
                         continue;
                     }
@@ -71,7 +71,7 @@ public class Servidor {
                             break;
 
                         case "ALUGUEL":
-                            if(parts.length < 2) {
+                            if (parts.length < 2) {
                                 out.println("Comando inválido!");
                                 break;
                             }
@@ -80,7 +80,7 @@ public class Servidor {
                             break;
 
                         case "DEVOLUCAO":
-                            if(parts.length < 2) {
+                            if (parts.length < 2) {
                                 out.println("Comando inválido!");
                                 break;
                             }
@@ -89,28 +89,25 @@ public class Servidor {
                             break;
 
                         case "ADICIONA":
-                            if(parts.length < 5) {
+                            if (parts.length < 5) {
                                 out.println("Comando inválido!");
                                 break;
                             }
-                            String titulo = parts[1];
+                            String tituloAdd = parts[1];
                             String autor = parts[2];
-                            String genero = parts[3];
+                            String generoAdd = parts[3];
                             int exemplares = Integer.parseInt(parts[4]);
-                            addBook(new Livro(titulo, autor, genero, exemplares), out);
+                            addBook(new Livro(tituloAdd, autor, generoAdd, exemplares), out);
                             break;
 
-                        case "DISPONIVEL":
+                        case "GENERO":
                             if (parts.length < 2) {
                                 out.println("Comando inválido!");
                                 break;
                             }
-                            String tituloDisponivel = parts[1];
-                            showAvailableCopies(tituloDisponivel, out);
-                            break;
 
-                        case "POPULARES":
-                            showPopularAuthors(out);
+                            String generoSearch = parts[1];
+                            listBooksByGenre(generoSearch, out);
                             break;
 
                         default:
@@ -122,6 +119,19 @@ public class Servidor {
             }
         }
 
+        private void listBooksByGenre(String genero, PrintWriter out) {
+            boolean found = false;
+            for (Livro livro : livros) {
+                if (livro.getGenero().equalsIgnoreCase(genero)) {
+                    out.println(livro);
+                    found = true;
+                }
+            }
+            if (!found) {
+                out.println("Nenhum livro encontrado para o gênero: " + genero);
+            }
+        }
+        
         private void rentBook(String titulo, PrintWriter out) {
             for (Livro livro : livros) {
                 if (livro.getTitulo().equalsIgnoreCase(titulo) && livro.getExemplares() > 0) {
@@ -151,34 +161,7 @@ public class Servidor {
             livros.add(livro);
             saveLivros();
             out.println("Adicionado: " + livro);
-        }
-
-        private void showAvailableCopies(String titulo, PrintWriter out) {
-            for (Livro livro : livros) {
-                if (livro.getTitulo().equalsIgnoreCase(titulo)) {
-                    out.println("Exemplares disponíveis de '" + titulo + "': " + livro.getExemplares());
-                    return;
-                }
-            }
-            out.println("Livro não encontrado.");
-        }
-
-        private void showPopularAuthors(PrintWriter out) {
-            Map<String, Integer> authorCount = new HashMap<>();
-            for (Livro livro : livros) {
-                String autor = livro.getAutor();
-                authorCount.put(autor, authorCount.getOrDefault(autor, 0) + livro.getContadorAluguel());
-            }
-
-            List<Map.Entry<String, Integer>> sortedAuthors = new ArrayList<>(authorCount.entrySet());
-            sortedAuthors.sort((a1, a2) -> a2.getValue().compareTo(a1.getValue())); // Ordena por número de aluguéis
-
-            StringBuilder sb = new StringBuilder();
-            for (Map.Entry<String, Integer> entry : sortedAuthors) {
-                sb.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" vezes alugado\n");
-            }
-
-            out.println(sb.toString());
+            System.out.println("Lista de livros após adição: " + livros);
         }
     }
 }
