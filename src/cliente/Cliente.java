@@ -2,6 +2,8 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
+import static java.lang.System.*;
+
 public class Cliente {
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 12345;
@@ -30,13 +32,39 @@ public class Cliente {
                     break;
                 }
 
+                input = formarComando(input);
                 out.println(input);
+
                 String response = in.readLine();
-                System.out.println("Resposta do servidor: " + response);
+                if (response != null){
+                    System.out.println("Resposta do servidor: " + response);
+                } else {
+                    System.out.println("Servidor não respondeu. Verifique a conexão.");
+                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String formarComando(String input) {
+        String[] parts = input.split(";");
+        if (parts.length > 1) {
+            parts[1] = capitalizeWords(parts[1]);
+        }
+        return String.join(";", parts);
+    }
+
+    private static String capitalizeWords(String str) {
+        String[] words = str.toLowerCase().split(" ");
+        StringBuilder capitalized = new StringBuilder();
+        for (String word : words) {
+            if (word.length() > 0) {
+                capitalized.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
+            }
+        }
+        return capitalized.toString().trim();
     }
 }
 
