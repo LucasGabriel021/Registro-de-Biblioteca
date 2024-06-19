@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Arrays;
 
-public class ClientHandler extends Thread{
+public class ClientHandler extends Thread {
 
     Servidor servidor = new Servidor();
     private final Socket socket;
@@ -31,7 +31,7 @@ public class ClientHandler extends Thread{
 
                 switch (command) {
                     case "LISTA":
-                        out.println(servidor.livros);
+                        listAllBooks(out);
                         break;
 
                     case "ALUGUEL":
@@ -83,16 +83,28 @@ public class ClientHandler extends Thread{
         }
     }
 
+    private void listAllBooks(PrintWriter out) {
+        StringBuilder response = new StringBuilder();
+        for (Livro livro : servidor.livros) {
+            response.append(livro).append("\n\n"); // Adiciona duas quebras de linha entre os livros
+        }
+        out.println(response.toString());
+    }
+
     private void listBooksByGenre(String genero, PrintWriter out) {
+        StringBuilder response = new StringBuilder();
         boolean found = false;
+
         for (Livro livro : servidor.livros) {
             if (livro.getGenero().equalsIgnoreCase(genero)) {
-                out.println(livro);
+                response.append(livro).append("\n\n");
                 found = true;
             }
         }
         if (!found) {
             out.println("Nenhum livro encontrado para o gênero: " + genero);
+        } else {
+            out.println(response.toString());
         }
     }
 
@@ -105,7 +117,7 @@ public class ClientHandler extends Thread{
                 return;
             }
         }
-        out.println("Livro não disponível .");
+        out.println("Livro não disponível.");
     }
 
     private void returnBook(String titulo, PrintWriter out) {

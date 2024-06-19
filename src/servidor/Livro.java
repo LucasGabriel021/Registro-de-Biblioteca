@@ -53,10 +53,10 @@ public class Livro {
 
     @Override
     public String toString() {
-        return  "Livro -> " +
-                "titulo='" + titulo + '\'' +
-                ", autor='" + autor + '\'' +
-                ", genero='" + genero + '\'' +
-                ", exemplares=" + exemplares;
+        return "Título: " + titulo + "\n" +
+                "Autor: " + autor + "\n" +
+                "Gênero: " + genero + "\n" +
+                "Exemplares: " + exemplares;
     }
+
 }

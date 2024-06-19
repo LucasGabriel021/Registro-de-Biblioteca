@@ -2,8 +2,6 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
-import static java.lang.System.*;
-
 public class Cliente {
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 12345;
@@ -35,13 +33,15 @@ public class Cliente {
                 input = formarComando(input);
                 out.println(input);
 
-                String response = in.readLine();
-                if (response != null){
-                    System.out.println("Resposta do servidor: " + response);
-                } else {
-                    System.out.println("Servidor não respondeu. Verifique a conexão.");
+                String response;
+                StringBuilder fullResponse = new StringBuilder();
+                while ((response = in.readLine()) != null) {
+                    fullResponse.append(response).append("\n");
+                    if (!in.ready()) { // Verifica se há mais linhas para ler
+                        break;
+                    }
                 }
-
+                System.out.println("Resposta do servidor: " + fullResponse.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,4 +67,3 @@ public class Cliente {
         return capitalized.toString().trim();
     }
 }
-
